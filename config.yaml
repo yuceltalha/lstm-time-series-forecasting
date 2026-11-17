@@ -1,0 +1,28 @@
+# Değişkenler bu dosyadan okunur; notebook da aynı ayarları kullanır.
+seed: 42
+data:
+  url: "https://storage.googleapis.com/tensorflow/tf-keras-datasets/jena_climate_2009_2016.csv.zip"
+  csv_name: "jena_climate_2009_2016.csv"
+  # Datasetin orijinal 10 dakikalık sıklığını 60 dakikaya indiriyoruz.
+  sample_every: 6
+  # Zaman sırasını koruyarak eğitim / doğrulama / test bölümü.
+  train_fraction: 0.7
+  val_fraction: 0.2
+  # Saatlik örneklerde 24 saatlik geçmiş -> 1 saat sonrası hedef.
+  lookback: 24
+  horizon: 1
+  target: "T (degC)"
+  features:
+    - "p (mbar)"
+    - "T (degC)"
+    - "rh (%)"
+    - "wv (m/s)"
+    - "wd (deg)"
+model:
+  units: 32
+  dropout: 0.2
+training:
+  epochs: 15
+  batch_size: 64
+  learning_rate: 0.001
+  patience: 4
