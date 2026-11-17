@@ -11,3 +11,6 @@ outputs/figures/*
 !outputs/figures/.gitkeep
 outputs/metrics.json
 .DS_Store
+
+# Private learning guide; do not track in the public repository.
+learning/lstm_interactive_guide.html
