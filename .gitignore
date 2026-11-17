@@ -14,3 +14,8 @@ outputs/metrics.json
 
 # Private learning guide; do not track in the public repository.
 learning/lstm_interactive_guide.html
+
+
+# Generated California Housing evaluation outputs (recreated by notebook)
+notebooks/linear_regression_metrics.json
+notebooks/linear_regression_predictions.csv
