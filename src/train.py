@@ -13,7 +13,7 @@ import yaml
 from src.download_data import ensure_dataset
 from src.preprocessing import load_frame, split_and_scale, make_windows
 from src.models import build_lstm
-from src.evaluate import evaluate_and_save, metrics
+from src.evaluate import evaluate_and_save
 
 
 def run(config_path):
@@ -67,19 +67,9 @@ def run(config_path):
     results, real, pred = evaluate_and_save(
         model, X_test, y_test, ys, history, root / 'outputs/figures')
 
-    # Naif kalıcılık baseline: geçmişteki EN SON sıcaklığı doğrudan kullan.
-    # Bu karşılaştırma, modelin basit sezgiyi gerçekten geçip geçmediğini gösterir.
-    t_feature_idx = d['features'].index(d['target'])
-    last_temp_scaled = X_test[:, -1, t_feature_idx].reshape(-1, 1)
-    naive = xs.inverse_transform(
-        np.column_stack([last_temp_scaled.ravel() if i == t_feature_idx
-                         else np.zeros(len(last_temp_scaled))
-                         for i in range(len(d['features']))]))[:, t_feature_idx]
-    results['persistence_baseline'] = metrics(real, naive)
-    import json
-    (root / 'outputs/metrics.json').write_text(
-        json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
-    print('TEST SONUÇLARI (°C):', json.dumps(results, indent=2))
+    # Bu çalışmada yalnızca LSTM regresyon yöntemi uygulanır.
+    # Test metrikleri evaluate_and_save fonksiyonunda kaydedilir.
+    print('LSTM REGRESYON TEST SONUÇLARI (°C):', results)
     return results
 
 

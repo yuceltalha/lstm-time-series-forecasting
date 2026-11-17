@@ -18,11 +18,10 @@ def metrics(y_true, y_pred):
 
 
 def evaluate_and_save(model, X_test, y_test, y_scaler, history, out_dir):
-    """Model tahminini ters ölçekle, naif karşılaştırma ve grafikleri kaydet.
+    """Tek LSTM regresyon modelinin tahminini °C'ye döndür ve grafikle.
 
-    Naif baseline, 'yarınki sıcaklık son gördüğüm sıcaklığa eşit' der.
-    Burada hedef 1 saat sonrası olduğundan ilk geçmiş sıcaklık değil,
-    son geçmiş sıcaklık özelliği kullanılır (indeksi eğitici verir).
+    Test kümesi yalnızca eğitim sonrasında değerlendirilir. Bu projede
+    ikinci bir regresyon algoritması veya model karşılaştırması bulunmaz.
     """
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
